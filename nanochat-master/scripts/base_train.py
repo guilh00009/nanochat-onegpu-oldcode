@@ -112,6 +112,7 @@ model_config_kwargs = dict(sequence_len=max_seq_len, vocab_size=vocab_size, n_la
 with torch.device("meta"):
     model_config = GPTConfig(**model_config_kwargs)
     model = GPT(model_config)
+    model.to(dtype=torch.bfloat16)
 model.to_empty(device=device)
 model.init_weights()
 orig_model = model # original, uncompiled model, for saving raw model state_dict
